@@ -129,22 +129,25 @@ public class HeapSort {
             }
         }
 
-        /** Sort the given array using heap sort
-         *
-         * @param arr array of integers
-         */
-        public static void sort(int[] arr) {
-            // FILL IN CODE: create a max heap and run heap sort
-            // Create a max heap
-            // Repeatedly call removeMax
-            // Copy elements from the heap array back to arr
 
+    }
+    /** Sort the given array using heap sort
+     *
+     * @param arr array of integers
+     */
+    public static void sort(int[] arr) {
+        // Create a max heap
+        // Repeatedly call removeMax
+        // Copy elements from the heap array back to arr
+        MaxHeap maxHeap = new MaxHeap(arr);
+        for (int k = 0; k< arr.length; k++) {
+            maxHeap.removeMax();
         }
+    }
 
-        public static void main(String[] args) {
-            int[] arr = {7, 4, 1, 12, 15, 8, 3, 9, 5, 17, 25, 2, 0, 10, 6};
-            sort(arr);
-            System.out.println(Arrays.toString(arr)); // Expected: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 17, 25]
-        }
+    public static void main(String[] args) {
+        int[] arr = {7, 4, 1, 12, 15, 8, 3, 9, 5, 17, 25, 2, 0, 10, 6};
+        HeapSort.sort(arr);
+        System.out.println(Arrays.toString(arr)); // Expected: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 17, 25]
     }
 }

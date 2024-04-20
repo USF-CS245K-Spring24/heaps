@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class MinHeap {
     private int[] heap; // the array to store the heap
     private int maxsize; // the size of the array
@@ -57,6 +59,7 @@ public class MinHeap {
      * @param pos1 the index of the first element in the heap
      * @param pos2 the index of the second element in the heap
      */
+
     private void swap(int pos1, int pos2) {
         int tmp;
         tmp = heap[pos1];
@@ -108,8 +111,10 @@ public class MinHeap {
         int smallestchild;
         while (!isLeaf(position)) {
             smallestchild = leftChild(position); // set the index of the smallest child to left child
+            System.out.println("smallestChild " + smallestchild);
             if ((smallestchild < size) && (heap[smallestchild] > heap[smallestchild + 1]))
                 smallestchild = smallestchild + 1; // right child was smaller, so smallest child = right child
+            System.out.println("smallestChild " + smallestchild);
 
             // the value of the smallest child is less than value of current,
             // the heap is already valid
@@ -121,7 +126,7 @@ public class MinHeap {
     }
 
     public static void main(String[] args) {
-        MinHeap minheap = new MinHeap(12);
+        /*MinHeap minheap = new MinHeap(12);
         minheap.insert(14);
         minheap.insert(16);
         minheap.insert(5);
@@ -131,7 +136,20 @@ public class MinHeap {
 
         System.out.println();
         System.out.println(minheap.removeMin());
+        minheap.print(); */
+        MinHeap minheap = new MinHeap(7);
+        minheap.insert(10);
+        minheap.insert(2);
+        minheap.insert(15);
+        minheap.insert(7);
+        minheap.insert(1);
+        minheap.insert(4);
         minheap.print();
+    /*
+        2
+      1     4
+    10 7   15
+     */
     }
 
 }

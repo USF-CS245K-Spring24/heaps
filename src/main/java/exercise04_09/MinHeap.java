@@ -26,7 +26,9 @@ public class MinHeap {
     public void buildFromTheBottomUp() {
         // FILL IN CODE: iterate over internal nodes from right to left
         // and call pushdown
-
+        for (int pos = size / 2; pos > 0; pos--) {
+            pushdown(pos);
+        }
     }
 
     /** Return the index of the left child of the element at index pos

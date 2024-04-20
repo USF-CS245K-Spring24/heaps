@@ -78,6 +78,11 @@ public class MinHeap {
         // FILL IN CODE:
         // Keep swapping current with its parent (and updating current),
         // if the heap[current] is smaller than the parent
+        while (heap[current] < heap[parent(current)]) {
+            swap(current, parent(current));
+            current = parent(current);
+
+        }
 
     }
 
@@ -108,23 +113,38 @@ public class MinHeap {
      */
     private void pushdown(int position) {
         int smallestChild;
-        while (!isLeaf(position)) {
-            // FILL IN CODE
-            smallestChild = leftChild(position); // set the index of the smallest child to left child
-            // Update the index of the smallest child if the right one is smaller than the left
 
-            // Check if the value in the smallest child is larger than the value at position
-            // If yes, we can return, we don't need to do anything
-
-            // If no, then we need to swap elements at position and smallestChild and
-            // update the position to move up the tree
-
+        while(!isLeaf(position)) {
+            smallestChild = leftChild(position);
+            if (smallestChild + 1 <= size) { // I have the right child
+                    if (heap[smallestChild + 1] < heap[smallestChild])
+                        smallestChild = smallestChild + 1;
+            }
+            // Compare the smallest child with the parent value
+            if (heap[position] < heap[smallestChild])
+                return;
+            swap(position, smallestChild);
+            position = smallestChild;
         }
+
     }
 
+    public void buildFromTheBottomUp(int[] elements) {
+        heap = new int[elements.length + 1];
+        for (int i = 1; i < elements.length + 1; i++)
+            heap[i] = elements[i-1];
+        size = elements.length;
+        heap[0] = Integer.MIN_VALUE;
+        print();
+        for (int k = size/2; k > 0; k--) {
+          pushdown(k);
+         }
+    }
+
+
     public static void main(String[] args) {
-        MinHeap minheap = new MinHeap(12);
-        minheap.insert(14);
+        MinHeap minheap = new MinHeap(11);
+        /*minheap.insert(14);
         minheap.insert(16);
         minheap.insert(5);
         minheap.insert(4);
@@ -133,7 +153,15 @@ public class MinHeap {
 
         System.out.println();
         System.out.println(minheap.removeMin());
+
+         */
+        int[] elements = {6, 9, 1, 15, 4, 7, 12, 16, 10, 0};
+        System.out.println("Before: ");
+        // System.out.println(Arrays.toString(elements));
+        minheap.buildFromTheBottomUp(elements);
+        System.out.println("After: ");
         minheap.print();
+
     }
 
 }
